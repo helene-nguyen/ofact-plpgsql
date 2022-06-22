@@ -1,0 +1,10 @@
+VISITEUR: email, mot de passe, nom, adresse, code postal, ville
+paie, 0N VISITEUR, 11 FACTURE: date paiement
+FACTURE: ref_facture, date emission
+
+::
+contient, 1N FACTURE, 11 LIGNE_FACTURE
+
+PRODUIT: description, prix HT, prix TTC
+concerne, 0N PRODUIT, 11 LIGNE_FACTURE
+LIGNE_FACTURE: ref_ligne, quantité
