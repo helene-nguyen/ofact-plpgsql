@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP VIEW IF EXISTS invoice_recap;
 
 COMMIT;

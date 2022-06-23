@@ -9,7 +9,7 @@ invoice_details."Invoice_Ref",
 invoice_details."Date issue",
 invoice_details."Payment date",
 invoice_details."Visitor",
-SUM(invoice_details."Total price")::numeric(10,2)
+SUM(invoice_details."Total price")::numeric(10,2) AS "Total invoice"
 FROM invoice_details
 GROUP BY 
 invoice_details."Invoice_Ref",
