@@ -1,12 +1,9 @@
+-- Deploy ofact_sqitch:ofact_v2 to pg
+
 BEGIN;
 
-TRUNCATE visitor,
-product,
-invoice,
-invoice_line RESTART IDENTITY;
-
 INSERT INTO
-    visitor(email, password, name, address, zip_code, city)
+    "visitor"("email", "password", "name", "address", "zip_code", "city")
 VALUES
     (
         'numero@bis.eg',
@@ -34,7 +31,7 @@ VALUES
     );
 
 INSERT INTO
-    product(label, price, price_with_taxes)
+    "product"("label", "price", "price_with_taxes")
 VALUES
     ('Lot de 20 pierres de taille', 2312, 2774.4),
     ('Esclave', 500, 527.5),
@@ -48,7 +45,7 @@ VALUES
     ('Cèpes (500G)', 48, 50.64);
 
 INSERT INTO
-    invoice(visitor_id, issued_at, paid_at)
+    "invoice"("visitor_id", "issued_at", "paid_at")
 VALUES
     (1, NOW(), null),
     (1, NOW() - '1 day 3 hours' :: interval, null),
@@ -66,7 +63,7 @@ VALUES
     (3, NOW(), null);
 
 INSERT INTO
-    invoice_line(quantity, invoice_id, product_id)
+    "invoice_line"("quantity", "invoice_id", "product_id")
 VALUES
     (2, 1, 1),
     (5, 1, 2),
