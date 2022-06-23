@@ -31,7 +31,7 @@ SELECT
     P.label AS "Description",
     P.price AS "Price",
     (SELECT tva_rate(Price,P.price_with_taxes)) AS "VAT",
-    (SELECT total_price(Quantity, P.price_with_taxes)) AS "Total price"
+    (SELECT total_price(Quantity, P.price_with_taxes)) AS "Total price per product"
 FROM "visitor" AS V
 JOIN "invoice" AS I
     ON I.visitor_id = V.id
@@ -40,4 +40,6 @@ JOIN "invoice_line" AS IL
 JOIN "product" AS P
     ON P.id = IL.product_id;
 
+-- Search for one visitor, try :
+--SELECT * FROM invoice_details WHERE invoice_details."Visitor" = 'Numérobis';
 COMMIT;
