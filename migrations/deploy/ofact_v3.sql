@@ -152,7 +152,7 @@ VALUES
     (SELECT invoice.id, invoice.visitor_id
      FROM invoice WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT
      ORDER BY invoice.id DESC LIMIT 1);
-    END;
+    END
 
 $$ LANGUAGE plpgsql VOLATILE;
 
@@ -208,7 +208,7 @@ VALUES
     (SELECT invoice_line.id,invoice_line.invoice_id, invoice_line.product_id 
      FROM invoice_line
      ORDER BY invoice_line.id DESC LIMIT 1);
-    END;
+    END
 
 $$ LANGUAGE plpgsql VOLATILE;
 
