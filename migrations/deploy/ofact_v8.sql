@@ -29,7 +29,8 @@ FOR _elem IN SELECT * FROM json_array_elements(_array)
 --                                                         ORDER BY invoice.id DESC LIMIT 1),
 --                                          'product_id', ((_elem ->> 'id')::INT)));
 
-    
+    -- Source https://stackoverflow.com/questions/1953326/how-to-call-a-function-postgresql
+    -- If you want to discard the result of SELECT, use PERFORM
     PERFORM (SELECT insert_invoice_line.inserted_invoice FROM insert_invoice_line(
                                 (SELECT json_build_object
                                          ('quantity',((_elem ->> 'quantity')::INT), 
@@ -37,6 +38,8 @@ FOR _elem IN SELECT * FROM json_array_elements(_array)
                                                         WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT
                                                         ORDER BY invoice.id DESC LIMIT 1),
                                          'product_id', ((_elem ->> 'id')::INT)))));
+    -- Source build object
+    -- https://www.postgresql.org/docs/9.6/functions-json.html  
     
   END LOOP;
 
