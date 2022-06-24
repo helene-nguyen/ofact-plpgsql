@@ -50,9 +50,37 @@ $$ LANGUAGE plpgsql VOLATILE; --default value
 
 - Ici le `RETURNS TABLE` me permet de générer une nouvelle table pour en ressortir le résultat récupéré par ma requête (requête qui renvoie donc 2 colonnes)
 
-Voilà une idée de résultat :
+Voilà une idée de résultat renvoyé avec la nouvelle table virtuelle :
 
 ![Inserted data](../images/insert.jpg)
+
+Et une insertion complète sur la table `visitor`:
+
+![Insert visitor](../images/insert_visitor2.jpg)
+
+Les problèmes que j'ai pu rencontrer se situent surtout au niveau des types.
+
+Pour pouvoir identifier les erreurs, PostgreSQL nous prévoit la fonction `RAISE NOTICE` qui permet de contrôler ce qu'on récupère :
+
+```sql
+RAISE NOTICE 'name_of_output %', value;
+```
+
+Le symbole `%` est un paramètre qui sera remplacé par la valeur qu'on aura choisi de faire ressortir :
+
+![log](../images/log.jpg)
+
+Ici, `$1` représente bien mon JSON (mais on remarque une erreur car j'ai déjà créé cette entrée avec le même e-mail)
+
+Les erreurs au niveau du type peuvent être notifiée de cette manière :
+
+![log](../images/log-type.jpg)
+
+J'ai créé ici une erreur volontaire sur l'exemple précédent où `inserted_id` est en TEXT alors que cete colonne attend un INTEGER.
+
+Toutes ces erreurs étaient des indices qui m'ont menée à la création de ma fonction telle qu'elle est. 
+
+
 
 Retour à l'accueil [HERE](../README.md)
 
