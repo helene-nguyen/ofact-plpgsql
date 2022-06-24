@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP FUNCTION IF EXISTS add_invoice(JSON);
 
 COMMIT;

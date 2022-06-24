@@ -3,7 +3,7 @@ BEGIN;
 
 -- Source help :https://stackoverflow.com/questions/20272650/how-to-loop-over-json-arrays-in-postgresql-9-3
 CREATE
-OR REPLACE FUNCTION add_invoice(json) 
+OR REPLACE FUNCTION add_invoice(JSON) 
 RETURNS TABLE (inserted_invoice INT) AS $$
 
 DECLARE
