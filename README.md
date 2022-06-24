@@ -50,3 +50,5 @@ Sources diverses :
 [Utiliser une clé primaire dans une autre table](https://stackoverflow.com/questions/55631622/can-i-use-one-same-primary-key-in-two-different-tables)
 
 [Clés primaires](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key/)
+
+[Normalistations expliquées](https://www.ionos.fr/digitalguide/hebergement/aspects-techniques/normalisation-base-de-donnees/)

@@ -151,7 +151,7 @@ VALUES
 );
     RETURN QUERY 
     (SELECT invoice.id, invoice.visitor_id
-     FROM invoice WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT
+     FROM invoice
      ORDER BY invoice.id DESC LIMIT 1);
     END
 

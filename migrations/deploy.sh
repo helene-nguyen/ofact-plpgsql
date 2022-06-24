@@ -1,6 +1,6 @@
 # Export variables d'environnements
 export PGUSER=ofact
-export PGPASSWORD=ofact
+export PGPASSWORD=#
 
 # https://sqitch.org/docs/manual/sqitch-deploy/
 # sqitch deploy [options] [<database>]
@@ -17,3 +17,5 @@ sqitch deploy -d ofact ofact_v7
 sqitch deploy -d ofact ofact_v8
 # sqitch deploy -d ofact ofact_v9
 
+
+## PUT YOUR PASSWORD !!!!!
