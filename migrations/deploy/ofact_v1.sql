@@ -7,6 +7,8 @@ CREATE DOMAIN fr_zip_code AS TEXT
 CHECK(
    VALUE ~ '^\d{5}$'
 );
+------*Control postal code FR (only 5 numbers, not int)
+CREATE DOMAIN EMAIL AS TEXT CHECK ( value ~ '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 ------*Create type control positive value with float
 CREATE DOMAIN POSFLOAT AS float CHECK (VALUE>0);
 ------*Create type control positive value

@@ -16,6 +16,7 @@ OR REPLACE FUNCTION insert_visitor(json)
 RETURNS TABLE (inserted_id INT, name TEXT) AS $$
 
 BEGIN
+
 INSERT INTO
     public.visitor (
         "email",
@@ -178,7 +179,7 @@ WHERE
 RETURN QUERY (SELECT invoice.id FROM invoice WHERE invoice.id = ($1->> 'id')::INT);
 END
 
--- $$ LANGUAGE plpgsql VOLATILE;
+$$ LANGUAGE plpgsql VOLATILE;
 
 -------------*INVOICE LINE-------------
 -- json format create
