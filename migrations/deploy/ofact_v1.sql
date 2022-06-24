@@ -32,9 +32,7 @@ CREATE TABLE IF NOT EXISTS "product" (
 CREATE TABLE IF NOT EXISTS "invoice" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "visitor_id" INTEGER NOT NULL 
-        REFERENCES "visitor"("id") 
-            ON DELETE CASCADE,
--- deleting visitor will delete reference with invoice
+        REFERENCES "visitor"("id"),
     "issued_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "paid_at" TIMESTAMPTZ
 );

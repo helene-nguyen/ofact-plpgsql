@@ -178,7 +178,7 @@ WHERE
 RETURN QUERY (SELECT invoice.id FROM invoice WHERE invoice.id = ($1->> 'id')::INT);
 END
 
--- $$ LANGUAGE plpgsql VOLATILE;
+$$ LANGUAGE plpgsql VOLATILE;
 
 -------------*INVOICE LINE-------------
 -- json format create

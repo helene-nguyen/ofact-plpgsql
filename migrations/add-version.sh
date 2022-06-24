@@ -6,4 +6,5 @@
 # sqitch add ofact_v5 -n "05 - Summarize invoice"
 # sqitch add ofact_v6 -n "06 - Sales by date"
 # sqitch add ofact_v7 -n "07 - Packed the invoice"
-sqitch add ofact_v8 -n "08 - Add invoice"
+# sqitch add ofact_v8 -n "08 - Add invoice"
+# sqitch add ofact_v9 -n "09 - 3FN normalization"
