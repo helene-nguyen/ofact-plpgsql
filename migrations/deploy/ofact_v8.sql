@@ -12,8 +12,10 @@ _array JSON := ($1 ->> 'products');
 
 BEGIN
 
+PERFORM (SELECT insert_invoice."inserted_id" FROM insert_invoice($1));
+
 FOR _elem IN SELECT * FROM json_array_elements(_array)
-  LOOP
+LOOP
  
   -- As logger to check value
 --     RAISE NOTICE 'Output from space %', _elem ->> 'id';
@@ -31,19 +33,21 @@ FOR _elem IN SELECT * FROM json_array_elements(_array)
 
     -- Source https://stackoverflow.com/questions/1953326/how-to-call-a-function-postgresql
     -- If you want to discard the result of SELECT, use PERFORM
-    PERFORM (SELECT insert_invoice_line.inserted_invoice FROM insert_invoice_line(
-                                (SELECT json_build_object
-                                         ('quantity',((_elem ->> 'quantity')::INT), 
-                                          'invoice_id',(SELECT invoice.id FROM invoice 
-                                                        WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT
-                                                        ORDER BY invoice.id DESC LIMIT 1),
-                                         'product_id', ((_elem ->> 'id')::INT)))));
+    PERFORM (SELECT insert_invoice_line.inserted_invoice 
+             FROM insert_invoice_line(
+                (SELECT json_build_object
+                        ('quantity',((_elem ->> 'quantity')::INT), 
+                        'invoice_id',(SELECT invoice.id FROM invoice 
+                                    ORDER BY invoice.id DESC LIMIT 1),
+                        'product_id', ((_elem ->> 'id')::INT)))));
     -- Source build object
     -- https://www.postgresql.org/docs/9.6/functions-json.html  
-    
+
   END LOOP;
 
-    RETURN QUERY (SELECT insert_invoice."inserted_id" FROM insert_invoice($1));   
+    
+    RETURN QUERY ((SELECT invoice.id FROM invoice ORDER BY invoice.id DESC LIMIT 1));
+     
     END
 
 $$ LANGUAGE plpgsql VOLATILE;
