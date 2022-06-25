@@ -2,6 +2,9 @@
 
 BEGIN;
 
+CREATE TYPE
+
+
 --* Use my created view to have expected result
 CREATE VIEW invoice_recap AS
 SELECT 

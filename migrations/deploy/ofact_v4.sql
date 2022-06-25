@@ -7,7 +7,7 @@ CREATE OR REPLACE
 FUNCTION tva_rate(priceHT DOUBLE PRECISION, priceTTC DOUBLE PRECISION) 
 RETURNS DOUBLE PRECISION AS $$
         BEGIN
-                RETURN ((priceTTC - priceHT)/priceHT)::numeric(10,2);
+                RETURN ((priceTTC - priceHT)/priceTTC)::numeric(10,2);
         END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 --* Function calculate total price TTC

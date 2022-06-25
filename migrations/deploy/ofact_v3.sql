@@ -82,11 +82,15 @@ $$ LANGUAGE plpgsql VOLATILE;
 
 -------------*PRODUCT-------------
 -- json format create 
--- {
-    -- "label":"test",
-    -- "price": "2.50",
-    -- "price_with_taxes":"3"
--- }
+-- SELECT * FROM insert_product(
+-- '
+--     {
+--         "label":"test",
+--     "price": "2.50",
+--     "price_with_taxes":"3"
+--     }
+--'
+-- );
 CREATE
 OR REPLACE FUNCTION insert_product(json) 
 RETURNS TABLE (inserted_id INT, label TEXT) AS $$
@@ -200,6 +204,9 @@ RETURN QUERY
 END
 
 $$ LANGUAGE plpgsql VOLATILE;
+-- TEST
+-- SELECT * FROM update_invoice('{ "visitor_id": "1", "id": "10" }')
+
 
 -------------*INVOICE LINE-------------
 -- json format create
@@ -262,5 +269,7 @@ RETURN QUERY
 END
 
 $$ LANGUAGE plpgsql VOLATILE;
+--TEST
+-- SELECT * FROM update_invoice_line('{ "quantity": "10", "invoice_id": "1", "product_id":"1", "id":"2" }')
 
 COMMIT;
