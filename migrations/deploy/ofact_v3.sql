@@ -36,7 +36,10 @@ VALUES
         ($1 ->> 'city')::TEXT
 );
     RETURN QUERY
-        (SELECT visitor.id, visitor.email FROM visitor ORDER BY visitor.id DESC LIMIT 1);
+        (SELECT visitor.id, visitor.email 
+            FROM visitor 
+            ORDER BY visitor.id DESC LIMIT 1);
+
     END
 
 $$ LANGUAGE plpgsql VOLATILE; --default value
@@ -67,7 +70,11 @@ SET
 WHERE
     "id" = ($1->> 'id')::INT;
 
-RETURN QUERY(SELECT visitor.id FROM visitor WHERE visitor.id = ($1->> 'id')::INT);
+RETURN QUERY
+    (SELECT visitor.id 
+        FROM visitor 
+        WHERE visitor.id = ($1->> 'id')::INT);
+
 END
 
 $$ LANGUAGE plpgsql VOLATILE;
@@ -76,9 +83,9 @@ $$ LANGUAGE plpgsql VOLATILE;
 -------------*PRODUCT-------------
 -- json format create 
 -- {
---     "label":"test",
---     "price": "2.50",
---     "price_with_taxes":"3"
+    -- "label":"test",
+    -- "price": "2.50",
+    -- "price_with_taxes":"3"
 -- }
 CREATE
 OR REPLACE FUNCTION insert_product(json) 
@@ -97,7 +104,11 @@ VALUES
         ($1 ->> 'price')::POSFLOAT,
         ($1 ->> 'price_with_taxes')::POSFLOAT
 );
-    RETURN QUERY(SELECT product.id, product.label FROM product ORDER BY product.id DESC LIMIT 1);
+    RETURN QUERY
+        (SELECT product.id, product.label 
+            FROM product 
+            ORDER BY product.id DESC LIMIT 1);
+
     END
 
 $$ LANGUAGE plpgsql VOLATILE;
@@ -122,7 +133,11 @@ SET
 WHERE
     "id" = ($1->> 'id')::INT;
 
-RETURN QUERY (SELECT product.id FROM product WHERE product.id = ($1->> 'id')::INT);
+RETURN QUERY 
+    (SELECT product.id 
+        FROM product 
+        WHERE product.id = ($1->> 'id')::INT);
+
 END
 
 $$ LANGUAGE plpgsql VOLATILE;
@@ -151,8 +166,9 @@ VALUES
 );
     RETURN QUERY 
     (SELECT invoice.id, invoice.visitor_id
-     FROM invoice
-     ORDER BY invoice.id DESC LIMIT 1);
+        FROM invoice
+        ORDER BY invoice.id DESC LIMIT 1);
+
     END
 
 $$ LANGUAGE plpgsql VOLATILE;
@@ -176,7 +192,11 @@ SET
 WHERE
     invoice."id" = ($1->> 'id')::INT;
     
-RETURN QUERY (SELECT invoice.id FROM invoice WHERE invoice.id = ($1->> 'id')::INT);
+RETURN QUERY 
+    (SELECT invoice.id 
+        FROM invoice 
+        WHERE invoice.id = ($1->> 'id')::INT);
+
 END
 
 $$ LANGUAGE plpgsql VOLATILE;
@@ -206,9 +226,9 @@ VALUES
         ($1 ->> 'product_id')::INT
 ); 
     RETURN QUERY 
-    (SELECT invoice_line.id,invoice_line.invoice_id, invoice_line.product_id 
-     FROM invoice_line
-     ORDER BY invoice_line.id DESC LIMIT 1);
+        (SELECT invoice_line.id,invoice_line.invoice_id, invoice_line.product_id 
+            FROM invoice_line
+            ORDER BY invoice_line.id DESC LIMIT 1);
     END
 
 $$ LANGUAGE plpgsql VOLATILE;
@@ -235,8 +255,10 @@ WHERE
     "id" = ($1->> 'id')::INT;
 
 RETURN QUERY 
-    (SELECT invoice_line.id FROM invoice_line
+    (SELECT invoice_line.id 
+        FROM invoice_line
         WHERE invoice_line.id = ($1->> 'id')::INT);
+
 END
 
 $$ LANGUAGE plpgsql VOLATILE;
