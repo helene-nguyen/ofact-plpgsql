@@ -1,5 +1,4 @@
 -- Revert ofact_sqitch:ofact_v2 from pg
-
 BEGIN;
 
 TRUNCATE visitor,

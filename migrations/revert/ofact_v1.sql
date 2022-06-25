@@ -8,5 +8,5 @@ DROP TABLE IF EXISTS public.product;
 DROP TABLE IF EXISTS public.visitor;
 
 --* Drop types because it stays registered
-DROP TYPE IF EXISTS "fr_zip_code", "posint", "posfloat";
+DROP TYPE IF EXISTS "fr_zip_code", "posint", "posfloat", "email";
 COMMIT;

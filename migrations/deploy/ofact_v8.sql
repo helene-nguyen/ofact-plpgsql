@@ -18,13 +18,13 @@ FOR _elem IN SELECT * FROM json_array_elements(_array)
 LOOP
  
   -- As logger to check value
---     RAISE NOTICE 'Output from space %', _elem ->> 'id';
---     RAISE NOTICE 'Output from space %', _elem ->> 'quantity';
---     RAISE NOTICE 'Output from space %', (json(_array));
---     RAISE NOTICE 'Output from space %', (SELECT invoice.id
+--     RAISE NOTICE 'Output from Gondor %', _elem ->> 'id';
+--     RAISE NOTICE 'Output from Gondor %', _elem ->> 'quantity';
+--     RAISE NOTICE 'Output from Gondor %', (json(_array));
+--     RAISE NOTICE 'Output from Gondor %', (SELECT invoice.id
 --      FROM invoice WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT
 --      ORDER BY invoice.id DESC LIMIT 1) ;
---     RAISE NOTICE 'Output from space %', (SELECT json_build_object
+--     RAISE NOTICE 'Output from Gondor %', (SELECT json_build_object
 --                                          ('quantity',((_elem ->> 'quantity')::INT), 
 --                                           'invoice_id',(SELECT invoice.id FROM invoice 
 --                                                         WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT

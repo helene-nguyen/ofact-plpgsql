@@ -13,7 +13,7 @@ BEGIN;
 -- }
 CREATE
 OR REPLACE FUNCTION insert_visitor(json) 
-RETURNS TABLE (inserted_id INT, name TEXT) AS $$
+RETURNS TABLE (inserted_id INT, email TEXT) AS $$
 
 BEGIN
 
@@ -36,7 +36,7 @@ VALUES
         ($1 ->> 'city')::TEXT
 );
     RETURN QUERY
-        (SELECT visitor.id, visitor.name FROM visitor WHERE visitor.name = ($1 ->> 'name')::TEXT);
+        (SELECT visitor.id, visitor.email FROM visitor WHERE visitor.email = ($1 ->> 'email')::TEXT);
     END
 
 $$ LANGUAGE plpgsql VOLATILE; --default value
