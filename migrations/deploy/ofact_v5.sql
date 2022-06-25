@@ -2,7 +2,7 @@
 
 BEGIN;
 
---* Use my created function to have expected result
+--* Use my created view to have expected result
 CREATE VIEW invoice_recap AS
 SELECT 
 invoice_details."Invoice_Ref",

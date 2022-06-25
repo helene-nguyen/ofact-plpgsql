@@ -78,11 +78,38 @@ Les erreurs au niveau du type peuvent être notifiée de cette manière :
 
 J'ai créé ici une erreur volontaire sur l'exemple précédent où `inserted_id` est en TEXT alors que cete colonne attend un INTEGER.
 
-Toutes ces erreurs étaient des indices qui m'ont menée à la création de ma fonction telle qu'elle est. 
+Toutes ces erreurs étaient des indices qui m'ont menée à la création de ma fonction telle qu'elle est.
 
+___
 
+# UPDATE function
 
+Pour la mise à jour, l'exemple ci-dessous concerne la facture
+
+```sql
+CREATE
+OR REPLACE FUNCTION update_invoice(json) 
+RETURNS TABLE (updated_id INT) AS $$
+
+BEGIN
+UPDATE
+    invoice
+SET
+    "visitor_id" = ($1 ->> 'visitor_id')::INT,
+    "paid_at" = COALESCE(($1 ->> 'paid_at')::TIMESTAMPTZ, paid_at)
+    -- Source used : https://medium.com/developer-rants/conditional-update-in-postgresql-a27ddb5dd35
+WHERE
+    invoice."id" = ($1->> 'id')::INT;
+    
+RETURN QUERY (SELECT invoice.id FROM invoice WHERE invoice.id = ($1->> 'id')::INT);
+END
+
+$$ LANGUAGE plpgsql VOLATILE;
+```
+
+On voit ici plusieurs choses :
+
+- On veut renvoyer l'id de la facture qui a été mise à jour
+- On utilise `COALESCE ()` car cela nous permet de soit conserver la valeur de la date de paiement déjà effectué et si la date de paiement n'a pas encore été rentrée (donc si la valeur est `NULL`), soit de la remplacer par la valeur qu'on aura saisi
 
 Retour à l'accueil [HERE](../README.md)
-
-
