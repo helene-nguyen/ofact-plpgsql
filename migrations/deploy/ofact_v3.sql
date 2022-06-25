@@ -36,7 +36,7 @@ VALUES
         ($1 ->> 'city')::TEXT
 );
     RETURN QUERY
-        (SELECT visitor.id, visitor.email FROM visitor WHERE visitor.email = ($1 ->> 'email')::TEXT);
+        (SELECT visitor.id, visitor.email FROM visitor ORDER BY visitor.id DESC LIMIT 1);
     END
 
 $$ LANGUAGE plpgsql VOLATILE; --default value
@@ -97,7 +97,7 @@ VALUES
         ($1 ->> 'price')::POSFLOAT,
         ($1 ->> 'price_with_taxes')::POSFLOAT
 );
-    RETURN QUERY(SELECT product.id, product.label FROM product WHERE product.label = ($1 ->> 'label')::TEXT);
+    RETURN QUERY(SELECT product.id, product.label FROM product ORDER BY product.id DESC LIMIT 1);
     END
 
 $$ LANGUAGE plpgsql VOLATILE;
