@@ -2,41 +2,44 @@
 
 BEGIN;
 
-CREATE
-OR REPLACE FUNCTION packed_invoice(invoice_id INT) 
-RETURNS TABLE (
+CREATE TYPE packed AS (
     visitor TEXT, 
     city TEXT, 
     invoice_ref INT,
     date_issue TIMESTAMPTZ,
     date_payment TIMESTAMPTZ, lines JSON, 
-    total DOUBLE PRECISION) AS $$
+    total DOUBLE PRECISION
+);
+
+
+CREATE
+OR REPLACE FUNCTION packed_invoice(invoice_id INT) 
+RETURNS SETOF packed AS $$
 
 BEGIN
 
 RETURN QUERY
-
 (SELECT
-    invoice_details."Visitor",
-    invoice_details."City",
-    invoice_details."Invoice_Ref",
-    invoice_details."Date issue",
-    invoice_details."Payment date",
+    ID."Visitor",
+    ID."City",
+    ID."Invoice_Ref",
+    ID."Date issue",
+    ID."Payment date",
     JSON_AGG( json_build_object(
-       'Quantity',invoice_details."Quantity",
-        'Description',invoice_details."Description",
-        'Price',invoice_details."Price",
-        'VAT',invoice_details."VAT",
-        'Total',invoice_details."Total price per product")) AS lines,
-    SUM(invoice_details."Total price per product") AS "Total"
-FROM invoice_details
-WHERE invoice_details."Invoice_Ref" = invoice_id
+       'Quantity',ID."Quantity",
+        'Description',ID."Description",
+        'Price',ID."Price",
+        'VAT',ID."VAT",
+        'Total',ID."Total price per product")) AS lines,
+    SUM(ID."Total price per product") AS "Total"
+FROM invoice_details AS ID
+WHERE ID."Invoice_Ref" = invoice_id
 GROUP BY 
-    invoice_details."Visitor",
-    invoice_details."City", 
-    invoice_details."Invoice_Ref",
-    invoice_details."Date issue",
-    invoice_details."Payment date");
+    ID."Visitor",
+    ID."City", 
+    ID."Invoice_Ref",
+    ID."Date issue",
+    ID."Payment date");
 
 END
 

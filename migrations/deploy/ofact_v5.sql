@@ -11,7 +11,7 @@ I."Invoice_Ref",
 I."Date issue",
 I."Payment date",
 I."Visitor",
-SUM(I."Total price per product")::numeric(10,2) AS "Total invoice"
+SUM(I."Total price per product")::numeric(100,2) AS "Total invoice"
 FROM invoice_details AS I
 GROUP BY 
 I."Invoice_Ref",

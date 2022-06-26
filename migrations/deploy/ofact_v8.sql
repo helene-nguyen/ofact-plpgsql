@@ -16,39 +16,21 @@ PERFORM (SELECT insert_invoice."inserted_id" FROM insert_invoice($1));
 
 FOR _elem IN SELECT * FROM json_array_elements(_array)
 LOOP
- 
-  -- As logger to check value
---     RAISE NOTICE 'Output from Gondor %', _elem ->> 'id';
---     RAISE NOTICE 'Output from Gondor %', _elem ->> 'quantity';
---     RAISE NOTICE 'Output from Gondor %', (json(_array));
---     RAISE NOTICE 'Output from Gondor %', (SELECT invoice.id
---      FROM invoice WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT
---      ORDER BY invoice.id DESC LIMIT 1) ;
---     RAISE NOTICE 'Output from Gondor %', (SELECT json_build_object
---                                          ('quantity',((_elem ->> 'quantity')::INT), 
---                                           'invoice_id',(SELECT invoice.id FROM invoice 
---                                                         WHERE invoice.visitor_id = ($1 ->> 'visitor_id')::INT
---                                                         ORDER BY invoice.id DESC LIMIT 1),
---                                          'product_id', ((_elem ->> 'id')::INT)));
-
     -- Source https://stackoverflow.com/questions/1953326/how-to-call-a-function-postgresql
     -- If you want to discard the result of SELECT, use PERFORM
     PERFORM (SELECT insert_invoice_line.inserted_invoice 
              FROM insert_invoice_line(
+    -- Source build object
+    -- https://www.postgresql.org/docs/9.6/functions-json.html  
                 (SELECT json_build_object
                         ('quantity',((_elem ->> 'quantity')::INT), 
                         'invoice_id',(SELECT invoice.id FROM invoice 
                                     ORDER BY invoice.id DESC LIMIT 1),
                         'product_id', ((_elem ->> 'id')::INT)))));
-    -- Source build object
-    -- https://www.postgresql.org/docs/9.6/functions-json.html  
-
-  END LOOP;
-
-    
+END LOOP;
+  
     RETURN QUERY ((SELECT invoice.id FROM invoice ORDER BY invoice.id DESC LIMIT 1));
-     
-    END
+END
 
 $$ LANGUAGE plpgsql VOLATILE;
 

@@ -5,4 +5,6 @@ BEGIN;
 DROP FUNCTION IF EXISTS 
     packed_invoice(invoice_id INT);
 
+DROP TYPE IF EXISTS packed;
+
 COMMIT;

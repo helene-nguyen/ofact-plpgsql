@@ -31,7 +31,7 @@ Détails [ICI](./__docs/04_crud.md)
 Détails [ICI](./__docs/05_jointures.md)
 ## Utilisation d'une view dans une view et subqueries
 
-Détails [ICI](./__docs/06_fonctions.md)
+Détails [ICI](./__docs/06_views.md)
 ## Fonction avec des paramètres
 
 Détails [ICI](./__docs/07_params.md)
@@ -43,6 +43,14 @@ Détails [ICI](./__docs/08_json.md)
 
 Détails [ICI](./__docs/09_loop.md)
 
+## Mot de la fin
+
+Toutes ces notions apprises nous permettent de nous projeter quant à l'utilisation des `VIEW`, `FUNCTION` et `INDEX` pour la performance des sites et ce n'est pas rien ! 
+
+Encore un petit visuel de ce que cela peut donner lorsqu'on a créé toutes ces fonctions :
+
+![end](./images/end.jpg)
+
 ___
 
 Sources diverses :
@@ -52,3 +60,7 @@ Sources diverses :
 [Clés primaires](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-primary-key/)
 
 [Normalistations expliquées](https://www.ionos.fr/digitalguide/hebergement/aspects-techniques/normalisation-base-de-donnees/)
+
+[Utilisation de PERFORM](https://stackoverflow.com/questions/1953326/how-to-call-a-function-postgresql)
+
+[Utilisation de json_build_object](https://www.postgresql.org/docs/9.6/functions-json.html)

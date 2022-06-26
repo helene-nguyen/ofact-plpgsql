@@ -2,9 +2,14 @@
 
 BEGIN;
 
+CREATE TYPE sales AS(
+    date TIMESTAMPTZ, 
+    nb_invoices BIGINT, 
+    total NUMERIC
+);
 CREATE
 OR REPLACE FUNCTION sales_by_date(date1 DATE, date2 DATE) 
-RETURNS TABLE (date TIMESTAMPTZ, nb_invoices BIGINT, total NUMERIC) AS $$
+RETURNS SETOF sales AS $$
 
 BEGIN
 

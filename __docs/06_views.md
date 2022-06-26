@@ -64,4 +64,6 @@ FROM invoice AS I;
 SELECT * FROM invoice_recap_subqueries;
 ```
 
+Donc ici pour le total TTC de la facture, on remarque une requête imbriquée qui fait le lien avec notre requête principale (donc la requête parent) grâce à la condition `WHERE` où on reprend bien `I.id` qui correspond à `invoice.id`.
+
 Retour à l'accueil [HERE](../README.md)

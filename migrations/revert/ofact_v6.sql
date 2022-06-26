@@ -5,4 +5,6 @@ BEGIN;
 DROP FUNCTION IF EXISTS 
     sales_by_date(date1 DATE, date2 DATE);
 
+DROP TYPE IF EXISTS sales;
+
 COMMIT;
