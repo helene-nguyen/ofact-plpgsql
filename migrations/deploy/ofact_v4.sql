@@ -7,9 +7,14 @@ CREATE OR REPLACE
 FUNCTION tva_rate(priceHT DOUBLE PRECISION, priceTTC DOUBLE PRECISION) 
 RETURNS DOUBLE PRECISION AS $$
         BEGIN
-                RETURN ((priceTTC - priceHT)/priceTTC)::numeric(10,2);
+        -- La formule standard Prix TTC (en €) = Prix HT (en €) x (1 + Taux TVA (en %) )
+        -- Taux TVA = ( Prix TTC / Prix HT ) - 1
+        RETURN ( (priceTTC / priceHT) - 1)::numeric(10,2);
+        
         END;
 $$ LANGUAGE plpgsql IMMUTABLE;
+
+-- Montant TVA (en €) = Taux TVA (en %) x Prix TTC (en €) / (1 + Taux TVA (en %) )
 --* Function calculate total price TTC
 CREATE OR REPLACE 
 FUNCTION total_price(quantity INT, priceTTC DOUBLE PRECISION) 
