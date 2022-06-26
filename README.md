@@ -29,7 +29,7 @@ Détails [ICI](./__docs/04_crud.md)
 ## Jouer avec les jointures
 
 Détails [ICI](./__docs/05_jointures.md)
-## Utilisation d'une view dans une fonction
+## Utilisation d'une view dans une view et subqueries
 
 Détails [ICI](./__docs/06_fonctions.md)
 ## Fonction avec des paramètres

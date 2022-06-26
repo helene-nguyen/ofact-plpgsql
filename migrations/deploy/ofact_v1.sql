@@ -58,7 +58,7 @@ USING BRIN ("email", "password", "name", "address", "zip_code", "city");
 CREATE INDEX "product_brin_idx" ON "product" 
 USING BRIN ("label", "price", "price_with_taxes");
 CREATE INDEX "invoice_brin_idx" ON "invoice" 
-USING BRIN ("visitor_id", "issued_at", "paid_at");
+USING BRIN ("visitor_id", "issued_at");
 CREATE INDEX "invoice_line_brin_idx" ON "invoice_line" 
 USING BRIN ("quantity", "invoice_id", "product_id");
 

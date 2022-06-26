@@ -23,9 +23,8 @@ ORDER BY I."Invoice_Ref";
 -- Search invoice recap :
 --SELECT * FROM invoice_recap;
 
---* Subqueries version
-
--- CREATE VIEW invoice_recap2 AS
+-- * Subqueries version
+-- CREATE VIEW invoice_recap_subqueries AS
 -- SELECT 
 --     I.id "Invoice_Ref", 
 --     I.issued_at "Date issue", 
@@ -44,6 +43,6 @@ ORDER BY I."Invoice_Ref";
 -- 	)::NUMERIC(10,2) AS "Total"
 -- FROM invoice AS I;
 
--- SELECT * FROM invoice_recap2;
+-- SELECT * FROM invoice_recap_subqueries;
 
 COMMIT;

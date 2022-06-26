@@ -7,9 +7,9 @@ export PGPASSWORD=#
 # sqitch deploy [options] [<database>] --to-change <change>
 
 # Deploy Global :
-sqitch deploy -d ofact ofact_v1
-sqitch deploy -d ofact ofact_v2
-sqitch deploy -d ofact ofact_v3
+# sqitch deploy -d ofact ofact_v1
+# sqitch deploy -d ofact ofact_v2
+# sqitch deploy -d ofact ofact_v3
 # sqitch deploy -d ofact ofact_v4
 # sqitch deploy -d ofact ofact_v5
 # sqitch deploy -d ofact ofact_v6
